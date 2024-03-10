@@ -95,14 +95,14 @@ func simulate(dieFunc func() int, bouncesMin int, bouncesMax int, critNeut []int
 
 	for b := 0; b < bounces; b++ {
 		preroll := dieFunc()
-		fmt.Printf("\r>\033[34m%3d\033[0m", preroll) // purple while rolling
+		fmt.Printf("\r>\033[34m%3d\033[0m", preroll) // blue while rolling
 
 		rwait := globalRand(50) + 25
 		time.Sleep(time.Millisecond * time.Duration(rwait))
 	}
 
 	actualRoll := dieFunc()
-	colour := "\033[34m" // Blue
+	colour := "\033[36m" // Blue
 	if isIn(critNeut, actualRoll) {
 		colour += "\033[1m\033[35m" // Purple
 	} else if isIn(critBad, actualRoll) {
