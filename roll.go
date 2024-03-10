@@ -89,6 +89,9 @@ func main() {
 }
 
 func simulate(dieFunc func() int, bouncesMin int, bouncesMax int, critNeut []int, critGood []int, critBad []int) int {
+	actualRoll := dieFunc()
+
+	// The following segment is just to animate a little dice roll
 	bounces := globalRand(bouncesMax-bouncesMin) + bouncesMin
 
 	fmt.Print("")
@@ -100,11 +103,11 @@ func simulate(dieFunc func() int, bouncesMin int, bouncesMax int, critNeut []int
 		rwait := globalRand(50) + 25
 		time.Sleep(time.Millisecond * time.Duration(rwait))
 	}
+	// End diceroll animation
 
-	actualRoll := dieFunc()
-	colour := "\033[36m" // Blue
+	colour := "\033[36m" // Cyan
 	if isIn(critNeut, actualRoll) {
-		colour += "\033[1m\033[35m" // Purple
+		colour = "\033[1m\033[35m" // Purple
 	} else if isIn(critBad, actualRoll) {
 		colour = "\033[1m\033[31m" // Red
 	} else if isIn(critGood, actualRoll) {
